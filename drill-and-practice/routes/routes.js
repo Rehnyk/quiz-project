@@ -21,13 +21,10 @@ router.post("/topics/:id/questions", questionController.createQuestion);
 router.get("/topics/:id/questions/:qId", questionController.findQuestionById);
 router.post("/topics/:tId/questions/:qId/delete", questionController.deleteQuestion);
 
-// for some reason, this is not requirement
-//router.get("/topics/:id/questions", questionController.createQuestion);
-
 
 // ANSWER OPTIONS
 router.post("/topics/:id/questions/:qId/options", optionController.createOption);
-//router.post("/topics/:tId/questions/:qId/options/:oId/delete", "");
+router.post("/topics/:tId/questions/:qId/options/:oId/delete", optionController.deleteOption);
 
 
 // USER AUTHENTICATION

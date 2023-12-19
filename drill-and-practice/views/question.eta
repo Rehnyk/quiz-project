@@ -25,6 +25,6 @@
 
 <% } else { %>
 
-    <p>No options yet. </p>
+    <p>No options yet.</p>
 
 <% } %>

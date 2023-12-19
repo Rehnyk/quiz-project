@@ -29,7 +29,7 @@ const findQuestionById = async ({ request, response, params, render }) => {
 const deleteQuestion = async ({request, response, params}) => {
     await questionService.deleteQuestion(params.qId);
 
-    response.redirect(`/topics/${params.tId}/questions`);
+    response.redirect(`/topics/${params.tId}`);
 };
 
 export { createQuestion, findQuestionById, deleteQuestion};
