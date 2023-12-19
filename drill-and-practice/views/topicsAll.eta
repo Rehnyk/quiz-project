@@ -1,0 +1,25 @@
+<% layout("./layouts/layout.eta") %>
+
+
+<h2>Create Topic</h2>
+
+<form method="POST" action="/topics">
+    New Topic: <input type="text" name="name" /><br/>
+    <input type="submit" value="Create"/>
+</form>
+
+
+<h2>Show Topics here</h2>
+
+<% if (it.topics && it.topics.length > 0) { %>
+<ul>
+    <% it.topics.forEach(t => { %>
+        <li><%= t.id %> - <%= t.name %></li>
+    <% }); %>
+</ul>
+
+<% } else { %>
+
+    <p>No topics yet. </p>
+
+<% } %>

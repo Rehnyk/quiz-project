@@ -1,0 +1,5 @@
+<% layout("./layouts/layout.eta") %>
+
+<p>Single Topic</p>
+
+<p> <%= it.topic.name %> </p>
