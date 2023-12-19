@@ -1,5 +1,7 @@
 import * as questionService from "../../services/questionService.js";
 import * as topicService from "../../services/topicService.js";
+import * as optionService from "../../services/optionService.js";
+
 
 
 const createQuestion = async ({ request, response, params }) => {
@@ -18,15 +20,16 @@ const createQuestion = async ({ request, response, params }) => {
 };
 
 
-const findTopicById = async ({ request, response, params, render }) => {
-    render("topic.eta", { topic: await topicService.findTopicById(params.id) });
+const findQuestionById = async ({ request, response, params, render }) => {
+    render("question.eta",
+        { question: await questionService.findQuestionById(params.qId),
+        options: await optionService.showOptions(params.qId)});
 };
 
-const deleteTopic = async ({ request, response, params }) => {
-    await topicService.deleteTopic(params.id);
+const deleteQuestion = async ({request, response, params}) => {
+    await questionService.deleteQuestion(params.qId);
 
-    response.redirect("/");
+    response.redirect(`/topics/${params.tId}/questions`);
 };
 
-
-export { createQuestion, };
+export { createQuestion, findQuestionById, deleteQuestion};

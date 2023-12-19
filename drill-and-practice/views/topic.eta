@@ -18,7 +18,7 @@
     <ul>
         <% it.questions.forEach(q => { %>
             <%= q.id %> -
-            <a href="/topics/<%= q.topic_id %>/questions/:qId"> <%= q.question_text %>  <br> </a>
+            <a href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.question_text %>  <br> </a>
         <% }); %>
 
     </ul>

@@ -2,6 +2,7 @@ import { Router } from "../deps.js";
 import * as mainController from "./controllers/mainController.js";
 import * as topicController from "./controllers/topicController.js";
 import * as questionController from "./controllers/questionController.js"
+import * as optionController from "./controllers/optionController.js"
 
 
 const router = new Router();
@@ -17,12 +18,17 @@ router.post("/topics/:id/delete", topicController.deleteTopic);
 
 // QUESTIONS
 router.post("/topics/:id/questions", questionController.createQuestion);
-//router.get("/topics/:id/questions/:qId", "");
+router.get("/topics/:id/questions/:qId", questionController.findQuestionById);
+router.post("/topics/:tId/questions/:qId/delete", questionController.deleteQuestion);
+
+// for some reason, this is not requirement
+//router.get("/topics/:id/questions", questionController.createQuestion);
+
 
 // ANSWER OPTIONS
-//router.post("/topics/:id/questions/:qId/options", "");
+router.post("/topics/:id/questions/:qId/options", optionController.createOption);
 //router.post("/topics/:tId/questions/:qId/options/:oId/delete", "");
-//router.post("/topics/:tId/questions/:qId/delete", "");
+
 
 // USER AUTHENTICATION
 //router.get("/auth/register", "");

@@ -1,4 +1,5 @@
 import * as topicService from "../../services/topicService.js";
+import * as questionService from "../../services/questionService.js";
 
 const createTopic = async ({request, response}) => {
     const body = request.body({type: "form"});
@@ -20,7 +21,7 @@ const findTopicById = async ({request, response, params, render}) => {
     render("topic.eta",
         {
             topic: await topicService.findTopicById(params.id),
-            questions: await topicService.findQuestions(params.id)
+            questions: await questionService.findQuestions(params.id)
         });
 };
 

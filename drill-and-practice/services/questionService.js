@@ -6,19 +6,18 @@ const createQuestion = async (userId, topicId, text) => {
         VALUES (${userId}, ${topicId}, ${text})`;
 };
 
-const showTopics = async () => {
-    return await sql`SELECT * FROM topics ORDER BY name ASC`;
-};
-
-const findTopicById = async (id) => {
-    const rows = await sql`SELECT * FROM topics WHERE id = ${id}`;
+const findQuestionById = async (id) => {
+    const rows = await sql`SELECT * FROM questions WHERE id = ${id}`;
     return rows[0];
 };
 
-const deleteTopic = async (id) => {
-    await sql`DELETE FROM topics WHERE id = ${id}`;
+const findQuestions = async (topicId) => {
+    return await sql`SELECT * FROM questions WHERE topic_id = ${topicId}`;
+};
+
+const deleteQuestion = async (id) => {
+    await sql`DELETE FROM questions WHERE id = ${id}`;
 };
 
 
-
-export { createQuestion };
+export { createQuestion, findQuestionById, findQuestions, deleteQuestion };
