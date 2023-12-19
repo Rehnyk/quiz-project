@@ -14,7 +14,12 @@
 <% if (it.topics && it.topics.length > 0) { %>
 <ul>
     <% it.topics.forEach(t => { %>
-        <li><%= t.id %> - <%= t.name %></li>
+        <%= t.id %> -
+        <a href="/topics/<%= t.id %>"> <%= t.name %> </a>
+        <form method="POST" action="/topics/<%= t.id %>/delete">
+            <input type="submit" value="Delete" />
+        </form>
+
     <% }); %>
 </ul>
 

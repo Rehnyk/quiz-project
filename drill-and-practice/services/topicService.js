@@ -15,6 +15,13 @@ const findTopicById = async (id) => {
     return rows[0];
 };
 
+const deleteTopic = async (id) => {
+   await sql`DELETE FROM topics WHERE id = ${id}`;
+};
+
+const findQuestions = async (topicId) => {
+    return await sql`SELECT * FROM questions WHERE topic_id = ${topicId}`;
+};
 
 
-export { createTopic, showTopics, findTopicById };
+export { createTopic, showTopics, findTopicById, deleteTopic, findQuestions };
