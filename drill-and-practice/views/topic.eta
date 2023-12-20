@@ -1,13 +1,13 @@
 <% layout("./layouts/layout.eta") %>
 
-<h2>
-<%= it.topic.name %>
-</h2>
+<h1>
+    <%= it.topic.name %>
+</h1>
 
-<h3>Add Question</h3>
+<h2>Add Question</h2>
 
-<form method="POST" action="/topics/<%= it.topic.id %>/questions">
-    New Question: <input type="text" name="question_text" /><br/>
+<form class="add-new-element" method="POST" action="/topics/<%= it.topic.id %>/questions">
+    New Question: <input type="text" name="question_text"/><br/>
     <input type="submit" value="Add"/>
 </form>
 
@@ -17,9 +17,16 @@
 <% if (it.questions && it.questions.length > 0) { %>
     <ul>
         <% it.questions.forEach(q => { %>
+        <li class="question-item">
             <%= q.id %> -
-            <a href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.question_text %>  <br> </a>
+            <a href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.question_text %> </a>
+
+            <form method="POST" action="/topics/<%= q.topic_id %>/questions/<%= q.id %>/delete">
+                <input type="submit" value="Delete Question"/>
+            </form>
+        </li>
         <% }); %>
+
 
     </ul>
 

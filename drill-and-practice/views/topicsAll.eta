@@ -3,7 +3,7 @@
 
 <h2>Create Topic</h2>
 
-<form method="POST" action="/topics">
+<form class="add-new-element" method="POST" action="/topics">
     New Topic: <input type="text" name="name" /><br/>
     <input type="submit" value="Create"/>
 </form>
@@ -14,12 +14,13 @@
 <% if (it.topics && it.topics.length > 0) { %>
 <ul>
     <% it.topics.forEach(t => { %>
-        <%= t.id %> -
-        <a href="/topics/<%= t.id %>"> <%= t.name %> </a>
-        <form method="POST" action="/topics/<%= t.id %>/delete">
-            <input type="submit" value="Delete" />
-        </form>
-
+        <li class="topic-item" data-task-id="<%= t.id %>">
+            <%= t.id %> -
+            <a href="/topics/<%= t.id %>"> <%= t.name %> </a>
+            <form method="POST" action="/topics/<%= t.id %>/delete">
+                <input type="submit" value="Delete" />
+            </form>
+        </li>
     <% }); %>
 </ul>
 

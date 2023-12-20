@@ -1,2 +1,5 @@
-<a href="/"> Home </a>
-<a href="/topics"> Topics </a>
+<div class="nav-bar">
+    <a href="/">Home</a>
+    <a href="/topics">Topics</a>
+    <a href="/quiz">Quiz</a>
+</div>

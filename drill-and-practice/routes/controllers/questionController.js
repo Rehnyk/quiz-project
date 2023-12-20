@@ -23,7 +23,8 @@ const createQuestion = async ({ request, response, params }) => {
 const findQuestionById = async ({ request, response, params, render }) => {
     render("question.eta",
         { question: await questionService.findQuestionById(params.qId),
-        options: await optionService.showOptions(params.qId)});
+        options: await optionService.showOptions(params.qId),
+        topic: await topicService.findTopicById(params.id)});
 };
 
 const deleteQuestion = async ({request, response, params}) => {
