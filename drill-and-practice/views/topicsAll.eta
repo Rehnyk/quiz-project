@@ -1,24 +1,26 @@
 <% layout("./layouts/layout.eta") %>
 
 
-<h2>Create Topic</h2>
+<h4>Create Topic</h4>
 
 <form class="add-new-element" method="POST" action="/topics">
-    New Topic: <input type="text" name="name" /><br/>
-    <input type="submit" value="Create"/>
+    <input class="form-field" type="text" name="name" placeholder="New Topic"/>
+    <br>
+    <input class="form-action" type="submit" value="Create"/>
 </form>
 
 
-<h2>Show Topics here</h2>
+<h2>Topics</h2>
 
 <% if (it.topics && it.topics.length > 0) { %>
+
 <ul>
     <% it.topics.forEach(t => { %>
         <li class="topic-item" data-task-id="<%= t.id %>">
-            <%= t.id %> -
-            <a href="/topics/<%= t.id %>"> <%= t.name %> </a>
+            <a class="list-item-link" href="/topics/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
+
             <form method="POST" action="/topics/<%= t.id %>/delete">
-                <input type="submit" value="Delete" />
+                <input class="list-action" type="submit" value="Delete" />
             </form>
         </li>
     <% }); %>

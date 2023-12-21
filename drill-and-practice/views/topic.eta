@@ -1,28 +1,29 @@
 <% layout("./layouts/layout.eta") %>
 
+<a class="nav-back-link" href="/topics"> << Go back to Topics</a>
+
 <h1>
     <%= it.topic.name %>
 </h1>
 
-<h2>Add Question</h2>
+<h4>Add Question</h4>
 
 <form class="add-new-element" method="POST" action="/topics/<%= it.topic.id %>/questions">
-    New Question: <input type="text" name="question_text"/><br/>
-    <input type="submit" value="Add"/>
+    <input class="form-field" type="text" name="question_text" placeholder="New Question"/><br/>
+    <input class="form-action" type="submit" value="Add"/>
 </form>
 
 
-<h2>Show Questions</h2>
+<h2>Questions</h2>
 
 <% if (it.questions && it.questions.length > 0) { %>
     <ul>
         <% it.questions.forEach(q => { %>
         <li class="question-item">
-            <%= q.id %> -
-            <a href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.question_text %> </a>
+            <a class="list-item-link" href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.id %> - <%= q.question_text %> </a>
 
             <form method="POST" action="/topics/<%= q.topic_id %>/questions/<%= q.id %>/delete">
-                <input type="submit" value="Delete Question"/>
+                <input class="list-action" type="submit" value="Delete Question"/>
             </form>
         </li>
         <% }); %>

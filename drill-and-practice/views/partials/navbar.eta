@@ -1,5 +1,12 @@
 <div class="nav-bar">
-    <a href="/">Home</a>
-    <a href="/topics">Topics</a>
-    <a href="/quiz">Quiz</a>
+    <div class="app-nav">
+        <a href="/">Home</a>
+        <a href="/topics">Topics</a>
+        <a href="/quiz">Quiz</a>
+    </div>
+
+    <div class="user-nav">
+        <a href="/auth/register">Register</a>
+        <a href="/auth/login">Login</a>
+    </div>
 </div>

@@ -1,36 +1,41 @@
 <% layout("./layouts/layout.eta") %>
 
+<a class="nav-back-link" href="/topics/<%= it.topic.id %>"> << Go back to <%= it.topic.name %></a>
+
 <h1> <%= it.question.question_text %> </h1>
 
-<a href="/topics/<%= it.topic.id %>">Go back to <%= it.topic.name %></a>
 
-    <h2>Add Answer</h2>
+<h4>Add Answer</h4>
 
-        <form class="add-new-element" method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
-            <input type="checkbox" name="is_correct"/>
-            <input type="text" name="option_text"/>
-            <input type="submit" value="Add"/>
-        </form>
+<form class="add-new-element" method="POST"
+      action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
+    <div class="new-answer-field">
+        <input class="input-answer" type="text" name="option_text" placeholder="New Answer"/>
+        <div class="checkbox-div"> <input type="checkbox" name="is_correct"/>  Correct </div>
+
+    </div>
+    <input class="form-action" type="submit" value="Add"/>
+</form>
 
 
-    <h2>Answer Options</h2>
+<h2>Answers</h2>
 
-    <% if (it.options && it.options.length > 0) { %>
-        <ul>
-            <% it.options.forEach(o => { %>
-                <li class="option-item">
-                    <%= o.id %> - <%= o.is_correct %> / <%= o.option_text %>
+<% if (it.options && it.options.length > 0) { %>
+    <ul>
+        <% it.options.forEach(o => { %>
+            <li class="option-item">
+                <%= o.id %> - <%= o.is_correct %> / <%= o.option_text %>
 
-                    <form method="POST"
-                          action="/topics/<%= it.topic.id %>/questions/<%= o.question_id %>/options/<%= o.id %>/delete">
-                        <input type="submit" value="Delete Option"/>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
+                <form method="POST"
+                      action="/topics/<%= it.topic.id %>/questions/<%= o.question_id %>/options/<%= o.id %>/delete">
+                    <input class="list-action" type="submit" value="Delete Option"/>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
 
-    <% } else { %>
+<% } else { %>
 
-        <p>No options yet.</p>
+    <p>No options yet.</p>
 
 <% } %>
