@@ -3,7 +3,8 @@ import * as mainController from "./controllers/mainController.js";
 import * as topicController from "./controllers/topicController.js";
 import * as questionController from "./controllers/questionController.js"
 import * as optionController from "./controllers/optionController.js"
-
+import * as registrationController from "./controllers/registrationController.js";
+import * as loginController from "./controllers/loginController.js";
 
 const router = new Router();
 
@@ -28,10 +29,10 @@ router.post("/topics/:tId/questions/:qId/options/:oId/delete", optionController.
 
 
 // USER AUTHENTICATION
-//router.get("/auth/register", "");
-//router.post("/auth/register", "");
-//router.get("/auth/login", "");
-//router.post("/auth/login", "");
+router.get("/auth/register", registrationController.showRegistrationForm);
+router.post("/auth/register", registrationController.registerUser);
+router.get("/auth/login", loginController.showLoginForm);
+router.post("/auth/login", loginController.processLogin);
 
 
 // QUIZ

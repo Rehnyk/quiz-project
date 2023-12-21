@@ -29,6 +29,9 @@ h1 {
 }
 
 .nav-back-link {
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
     color: black;
 }
 
