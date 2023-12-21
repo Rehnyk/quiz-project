@@ -1,6 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
-<a class="nav-back-link" href="/topics"> << Go back to Topics</a>
+<a class="nav-back-link" href="/topics"> <i class="fa-solid fa-arrow-left"></i> Go back to Topics</a>
 
 <h1>
     <%= it.topic.name %>

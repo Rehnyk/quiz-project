@@ -1,6 +1,7 @@
 <% layout("./layouts/layout.eta") %>
 
-<a class="nav-back-link" href="/topics/<%= it.topic.id %>"> << Go back to <%= it.topic.name %></a>
+<a class="nav-back-link" href="/topics/<%= it.topic.id %>"> <i class="fa-solid fa-arrow-left"></i> Go back
+    to <%= it.topic.name %></a>
 
 <h1> <%= it.question.question_text %> </h1>
 
@@ -11,7 +12,7 @@
       action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
     <div class="new-answer-field">
         <input class="input-answer" type="text" name="option_text" placeholder="New Answer"/>
-        <div class="checkbox-div"> <input type="checkbox" name="is_correct"/>  Correct </div>
+        <div class="checkbox-div"><input type="checkbox" name="is_correct"/> Correct</div>
 
     </div>
     <input class="form-action" type="submit" value="Add"/>
@@ -24,7 +25,13 @@
     <ul>
         <% it.options.forEach(o => { %>
             <li class="option-item">
-                <%= o.id %> - <%= o.is_correct %> / <%= o.option_text %>
+                <div class="list-item">
+
+                    [ID:<%= o.id %>] - <%= o.option_text %>
+                    <% if (o.is_correct) { %>
+                        <i class="fa-regular fa-circle-check"></i>
+                    <% } %>
+                </div>
 
                 <form method="POST"
                       action="/topics/<%= it.topic.id %>/questions/<%= o.question_id %>/options/<%= o.id %>/delete">

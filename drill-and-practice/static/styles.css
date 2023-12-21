@@ -30,13 +30,22 @@ h1 {
 
 .nav-back-link {
     color: black;
-    display: flex;
-    width: 100%;
-    justify-content: end;
 }
 
 .nav-back-link:hover {
     color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-back-link i {
+    margin-right: 5px;
+}
+
+.fa-circle-check {
+    color: green;
+    font-size: 1.3rem;
+    margin-right: 5px;
 }
 /******** MAIN PAGE ***********************************************/
 
@@ -73,7 +82,7 @@ h4{
 
 .form-action:hover{
     color: black;
-    background: #e2c4f6;
+    background: #8b8291;
 }
 
 /** Answers **/
@@ -90,6 +99,8 @@ h4{
 
 .input-answer {
     border: none;
+    outline: none;
+    width: 90%;
     background: transparent;
 }
 
@@ -151,6 +162,22 @@ ul li a:hover{
     color: white;
     background: #363636;
 }
+
+/** Answers **/
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-right: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid grey;
+    border-radius: 8px;
+    color: black;
+}
+
+
 /******** BUTTONS *************************************************/
 
 /******** LOGIN FORM **********************************************/
