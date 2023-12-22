@@ -13,7 +13,6 @@ router.get("/", mainController.showMain);
 // TOPICS
 router.get("/topics", topicController.showTopics);
 router.post("/topics", topicController.createTopic);
-
 router.get("/topics/:id", topicController.findTopicById);
 router.post("/topics/:id/delete", topicController.deleteTopic);
 
@@ -21,7 +20,6 @@ router.post("/topics/:id/delete", topicController.deleteTopic);
 router.post("/topics/:id/questions", questionController.createQuestion);
 router.get("/topics/:id/questions/:qId", questionController.findQuestionById);
 router.post("/topics/:tId/questions/:qId/delete", questionController.deleteQuestion);
-
 
 // ANSWER OPTIONS
 router.post("/topics/:id/questions/:qId/options", optionController.createOption);

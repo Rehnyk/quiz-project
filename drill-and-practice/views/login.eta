@@ -1,13 +1,46 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>Login form</h1>
+<h1>Login</h1>
 
-<form method="POST" action="/auth/login">
-    Email:<br/>
-    <input type="email" name="email" /><br/>
-    Password:<br/>
-    <input type="password" name="password" /><br/>
-    <input type="submit" value="Login" />
-</form>
 
-<a href="/auth/register">Not yet registered? Register here.</a>
+    <div class="user-page">
+
+        <% if (it.errors && it.errors.authentication) { %>
+            <div class="auth-error">Wrong email or password.</div>
+        <% }  %>
+    <form class="authentication-form" method="POST" action="/auth/login">
+        <div class="email">
+            Email:
+            <% if (it.errors && it.errors.email) { %>
+                <% if (it.errors.email.required) { %>
+                    <div class="error">Email is required.</div>
+                <% } else if (it.errors.email.isEmail) { %>
+                    <div class="error">Invalid email address.</div>
+                <% } %>
+            <% } %>
+
+            <input type="email" name="email" value="<%= it.email %>"/>
+        </div>
+
+        <div class="password">
+            Password:
+            <% if (it.errors && it.errors.password) { %>
+                <% if (it.errors.password.required) { %>
+                    <div class="error">Password is required.</div>
+                <% } else if (it.errors.password.minLength) { %>
+                    <div class="error">Password must be at least 4 characters.</div>
+                <% } %>
+            <% } %>
+
+            <input type="password" name="password"/>
+        </div>
+
+        <div class="submit-btn">
+            <input type="submit" value="Login"/>
+        </div>
+    </form>
+
+
+    <a class="auth-link" href="/auth/register">Not yet registered? Register here.</a>
+
+</div>

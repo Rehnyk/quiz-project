@@ -1,21 +1,42 @@
-import { bcrypt } from "../../deps.js";
+import {bcrypt} from "../../deps.js";
 import * as userService from "../../services/userService.js";
+import {validasaur} from "../../deps.js";
 
+const userValidationRules = {
+    email: [validasaur.required, validasaur.isEmail],
+    password: [validasaur.required, validasaur.minLength(4)]
+}
 
-const registerUser = async ({ request, response }) => {
-    const body = request.body({ type: "form" });
+const registerUser = async ({request, response, render}) => {
+    const body = request.body({type: "form"});
     const params = await body.value;
 
-    await userService.addUser(
-        params.get("email"),
-        await bcrypt.hash(params.get("password")),
+    const userData = {
+        email: params.get("email"),
+        password: params.get("password")
+    }
+
+    const [passes, errors] = await validasaur.validate(
+        userData, userValidationRules
     );
 
-    response.redirect("/auth/login");
+    if (!passes) {
+        console.log('VALIDATION ERROR:', errors);
+        userData.errors = errors;
+        response.status = 403;
+        console.log('USER DATA', userData)
+        render("registration.eta", userData);
+    } else if (await userService.findUserByEmail(userData.email)) {
+        userData.errors = {authentication: "User already exist."}
+        render("registration.eta", userData);
+    } else {
+        await userService.addUser(userData.email, await bcrypt.hash(userData.password));
+        response.redirect("/auth/login");
+    }
 };
 
-const showRegistrationForm = ({ render }) => {
-    render("registration.eta");
+const showRegistrationForm = ({render}) => {
+    render("registration.eta", {email: ""});
 };
 
-export { registerUser, showRegistrationForm };
+export {registerUser, showRegistrationForm};

@@ -50,6 +50,21 @@ h1 {
     font-size: 1.3rem;
     margin-right: 5px;
 }
+
+.error {
+    color: red;
+    font-weight: normal;
+    float: right;
+    max-width: 80%;
+    text-align: right;
+}
+
+.auth-error {
+    color: #d50606;
+    font-weight: normal;
+    font-size: 1.5rem;
+    text-align: center;
+}
 /******** MAIN PAGE ***********************************************/
 
 
@@ -181,11 +196,56 @@ ul li a:hover{
 }
 
 
-/******** BUTTONS *************************************************/
-
 /******** LOGIN FORM **********************************************/
+.user-page {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 60px auto;
+}
 
+.authentication-form {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    margin: auto;
+    flex-wrap: wrap;
+    font-weight: bold;
+}
 
+.authentication-form div {
+    width: 100%;
+}
+
+.authentication-form div input {
+    width: 100%;
+}
+
+.email input, .password input{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid grey;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+.submit-btn input {
+    border: 1px solid grey;
+    padding: 6px 10px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    margin: 15px 0;
+    background: #1846de;
+}
+
+.auth-link {
+    color: black;
+}
 
 /******** NAVIGATION BAR ******************************************/
 .nav-bar {
@@ -198,7 +258,6 @@ ul li a:hover{
     width: 100%;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    border-bottom: 2px solid #bbb7b7;
 }
 
 .nav-bar a {
