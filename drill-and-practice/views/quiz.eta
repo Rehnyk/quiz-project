@@ -1,0 +1,19 @@
+<% layout("./layouts/layout.eta") %>
+
+<h2>Quiz Topics</h2>
+
+<% if (it.topics && it.topics.length > 0) { %>
+
+    <ul>
+        <% it.topics.forEach(t => { %>
+            <li class="topic-item" data-task-id="<%= t.id %>">
+                <a class="list-item-link" href="/quiz/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
+            </li>
+        <% }); %>
+    </ul>
+
+<% } else { %>
+
+    <p>No topics yet. </p>
+
+<% } %>

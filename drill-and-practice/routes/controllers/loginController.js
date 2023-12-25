@@ -7,7 +7,7 @@ const userValidationRules = {
     password: [validasaur.required, validasaur.minLength(4)]
 }
 
-const userData = {
+let userData = {
     email: "",
     password: ""
 }
@@ -29,7 +29,6 @@ const processLogin = async ({request, response, state, render}) => {
         response.status = 403;
         console.log('USER DATA', userData)
         render("login.eta", userData);
-
     } else {
 
         const userFromDB = await userService.findUserByEmail(userData.email);
@@ -67,8 +66,14 @@ const processLogin = async ({request, response, state, render}) => {
     }
 };
 
+const logoutUser = async ({request, response, state}) => {
+    await state.session.set("authenticated", false);
+    userData.email = "";
+    response.redirect("/auth/login");
+};
+
 const showLoginForm = ({render}) => {
     render("login.eta", userData);
 };
 
-export {processLogin, showLoginForm};
+export {processLogin, showLoginForm, logoutUser};

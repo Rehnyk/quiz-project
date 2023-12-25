@@ -5,8 +5,19 @@
         <a href="/quiz">Quiz</a>
     </div>
 
-    <div class="user-nav">
-        <a href="/auth/register">Register</a>
-        <a href="/auth/login">Login</a>
-    </div>
+
+    <% if (!it.user) { %>
+
+        <div class="user-nav">
+            <a href="/auth/register">Register</a>
+            <a href="/auth/login">Login</a>
+        </div>
+
+    <% } else { %>
+
+        <div class="user-nav">
+            <a href="/auth/logout">Logout</a>
+        </div>
+
+    <% } %>
 </div>

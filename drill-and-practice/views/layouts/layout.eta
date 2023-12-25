@@ -20,7 +20,7 @@
 
 <body>
 
-<% ~ includeFile("../partials/navbar.eta") %>
+<% ~ includeFile("../partials/navbar.eta", it) %>
 <% ~ it.body %>
 
 </body>
