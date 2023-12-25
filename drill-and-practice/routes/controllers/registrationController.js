@@ -26,16 +26,18 @@ const registerUser = async ({request, response, render}) => {
         response.status = 403;
         console.log('USER DATA', userData)
         render("registration.eta", userData);
-    } else if (await userService.findUserByEmail(userData.email)) {
+
+    } else if (await userService.findUserByEmail(userData.email).length > 0 ) {
         userData.errors = {authentication: "User already exist."}
         render("registration.eta", userData);
+
     } else {
         await userService.addUser(userData.email, await bcrypt.hash(userData.password));
         response.redirect("/auth/login");
     }
 };
 
-const showRegistrationForm = ({render}) => {
+const showRegistrationForm = async ({render}) => {
     render("registration.eta", {email: ""});
 };
 

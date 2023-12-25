@@ -4,7 +4,7 @@ import * as optionService from "../../services/optionService.js";
 import {validasaur} from "../../deps.js";
 
 
-const createQuestion = async ({ request, response, params, render }) => {
+const createQuestion = async ({ request, response, params, render, user }) => {
     const body = request.body({ type: "form" });
     const formParam = await body.value;
 
@@ -22,7 +22,7 @@ const createQuestion = async ({ request, response, params, render }) => {
             errors});
     } else {
         await questionService.createQuestion(
-            1,
+            user.id,
             topicId,
             qText,
         );
@@ -40,6 +40,7 @@ const findQuestionById = async ({ request, response, params, render }) => {
 };
 
 const deleteQuestion = async ({request, response, params}) => {
+    await optionService.deleteAllQuestionOptions(params.qId);
     await questionService.deleteQuestion(params.qId);
 
     response.redirect(`/topics/${params.tId}`);

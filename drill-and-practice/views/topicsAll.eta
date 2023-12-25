@@ -1,33 +1,40 @@
 <% layout("./layouts/layout.eta") %>
 
+<% if (it.user && it.user.admin) { %>
 
-<h4>Create Topic</h4>
+    <h4>Create Topic</h4>
 
-<form class="add-new-element" method="POST" action="/topics">
-    <input class="form-field" type="text" name="name" placeholder="New Topic"/>
-    <br>
-    <input class="form-action" type="submit" value="Create"/>
-</form>
+    <form class="add-new-element" method="POST" action="/topics">
+        <input class="form-field" type="text" name="name" placeholder="New Topic"/>
+        <br>
+        <input class="form-action" type="submit" value="Create"/>
+    </form>
 
-<% if (it.errors) { %>
-    <div class="error add-new-validation-err">Value required.</div>
+    <% if (it.errors) { %>
+        <div class="error add-new-validation-err">Value required.</div>
+    <% } %>
+
 <% } %>
+
 
 <h2>Topics</h2>
 
 <% if (it.topics && it.topics.length > 0) { %>
 
-<ul>
-    <% it.topics.forEach(t => { %>
-        <li class="topic-item" data-task-id="<%= t.id %>">
-            <a class="list-item-link" href="/topics/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
+    <ul>
+        <% it.topics.forEach(t => { %>
+            <li class="topic-item" data-task-id="<%= t.id %>">
+                <a class="list-item-link" href="/topics/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
 
-            <form method="POST" action="/topics/<%= t.id %>/delete">
-                <input class="list-action" type="submit" value="Delete" />
-            </form>
-        </li>
-    <% }); %>
-</ul>
+                <% if (it.user && it.user.admin) { %>
+                <form method="POST" action="/topics/<%= t.id %>/delete">
+                    <input class="list-action" type="submit" value="Delete"/>
+                </form>
+                <% } %>
+
+            </li>
+        <% }); %>
+    </ul>
 
 <% } else { %>
 

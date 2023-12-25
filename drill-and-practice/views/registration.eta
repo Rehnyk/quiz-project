@@ -6,40 +6,52 @@
 
     <% if (it.errors && it.errors.authentication) { %>
         <div class="auth-error">User with this email already exists.</div>
-    <% }  %>
+    <% } %>
 
-<form class="authentication-form" method="POST" action="/auth/register">
-    <div class="email">
-        Email:
-        <% if (it.errors && it.errors.email) { %>
-            <% if (it.errors.email.required) { %>
-                <div class="error">Email is required.</div>
+    <form class="authentication-form" method="POST" action="/auth/register">
+        <div class="email">
+            Email:
+            <% if (it.errors && it.errors.email) { %>
+                <% if (it.errors.email.required) { %>
+                    <div class="error">Email is required.</div>
                 <% } else if (it.errors.email.isEmail) { %>
                     <div class="error">Invalid email address.</div>
                 <% } %>
-        <% } %>
-
-        <input type="email" name="email" value="<%= it.email %>"/>
-    </div>
-
-    <div class="password">
-        Password:
-        <% if (it.errors && it.errors.password) { %>
-            <% if (it.errors.password.required) { %>
-                <div class="error">Password is required.</div>
-            <% } else if (it.errors.password.minLength) { %>
-                <div class="error">Password must be at least 4 characters.</div>
             <% } %>
-        <% } %>
 
-        <input type="password" name="password"/>
-    </div>
+            <input type="email" name="email" value="<%= it.email %>"/>
+        </div>
 
-    <div class="submit-btn">
-        <input type="submit" value="Register"/>
-    </div>
-</form>
+        <div class="password">
+            Password:
+            <% if (it.errors && it.errors.password) { %>
+                <% if (it.errors.password.required) { %>
+                    <div class="error">Password is required.</div>
+                <% } else if (it.errors.password.minLength) { %>
+                    <div class="error">Password must be at least 4 characters.</div>
+                <% } %>
+            <% } %>
 
-<a class="auth-link" href="/auth/login">Already registered? Login here.</a>
+            <input type="password" name="password"/>
+        </div>
 
+        <div class="submit-btn">
+            <input type="submit" value="Register"/>
+        </div>
+    </form>
+
+    <a class="auth-link" href="/auth/login">Already registered? Login here.</a>
+
+
+    <% if (it.users) { %>
+        <ul>
+            <% it.users.forEach(u => { %>
+                <li>
+                    <%= u.email %>
+                </li>
+            <% }); %>
+
+        </ul>
+
+    <% }; %>
 </div>

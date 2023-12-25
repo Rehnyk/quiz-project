@@ -56,13 +56,18 @@ const processLogin = async ({request, response, state, render}) => {
             return;
         }
 
-        await state.session.set("user", user);
+        await state.session.set("authenticated", true);
+        await state.session.set("user", {
+            id: user.id,
+            email: user.email,
+            admin: user.admin
+        });
+
         response.redirect("/topics");
     }
 };
 
 const showLoginForm = ({render}) => {
-    console.log('USER DATA:', userData);
     render("login.eta", userData);
 };
 
