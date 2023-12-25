@@ -39,9 +39,9 @@ router.get("/auth/logout", loginController.logoutUser)
 router.get("/quiz", quizController.showTopics);
 router.get("/quiz/:tId", quizController.findTopicById);
 router.get("/quiz/:tId/questions/:qId", quizController.showQuestion);
-//router.post("/quiz/:tId/questions/:qId/options/:oId", "");
-//router.get("/quiz/:tId/questions/:qId/correct", "");
-//router.get("/quiz/:tId/questions/:qId/incorrect", "");
+router.post("/quiz/:tId/questions/:qId/options/:oId", quizController.sendAnswer);
+router.get("/quiz/:tId/questions/:qId/correct", quizController.correctAnswer);
+router.get("/quiz/:tId/questions/:qId/incorrect", quizController.wrongAnswer);
 
 //API
 //router.get("api/questions/random", "");

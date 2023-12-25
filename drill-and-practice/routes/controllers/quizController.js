@@ -16,6 +16,9 @@ const findTopicById = async ({request, response, params, render}) => {
 };
 
 const showQuestion = async ({request, response, render, params}) => {
+    console.log('SHOW QUESTION', await questionService.findQuestionById(params.qId))
+    console.log('OPTIONS:', await optionService.showOptions(params.qId));
+
     render("quizQuestion.eta",
         {
             question: await questionService.findQuestionById(params.qId),
@@ -23,4 +26,16 @@ const showQuestion = async ({request, response, render, params}) => {
         });
 };
 
-export {showTopics, findTopicById, showQuestion};
+const sendAnswer = async ({request, response, render}) => {
+    render("quiz.eta", {topics: await topicService.showTopics()});
+};
+
+const correctAnswer = async ({request, response, render}) => {
+    render("quiz.eta", {topics: await topicService.showTopics()});
+};
+
+const wrongAnswer = async ({request, response, render}) => {
+    render("quiz.eta", {topics: await topicService.showTopics()});
+};
+
+export {showTopics, findTopicById, showQuestion, sendAnswer, correctAnswer, wrongAnswer};
