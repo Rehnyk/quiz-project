@@ -1,22 +1,34 @@
 import * as questionService from "../../services/questionService.js";
 import * as topicService from "../../services/topicService.js";
 import * as optionService from "../../services/optionService.js";
+import {validasaur} from "../../deps.js";
 
 
-
-const createQuestion = async ({ request, response, params }) => {
+const createQuestion = async ({ request, response, params, render }) => {
     const body = request.body({ type: "form" });
     const formParam = await body.value;
 
     const topicId =  params.id;
+    const qText = formParam.get("question_text");
 
-    await questionService.createQuestion(
-        1,
-        topicId,
-        formParam.get("question_text"),
-    );
+    const [passes, errors] = await validasaur.validate({value: qText}, {
+        value: [validasaur.required, validasaur.minLength(1)]
+    });
 
-    response.redirect(`/topics/${topicId}`);
+    if (!passes) {
+        console.log('ERRORS:', errors)
+        render("topic.eta",{ topic: await topicService.findTopicById(params.id),
+            questions: await questionService.findQuestions(params.id),
+            errors});
+    } else {
+        await questionService.createQuestion(
+            1,
+            topicId,
+            qText,
+        );
+
+        response.redirect(`/topics/${topicId}`);
+    }
 };
 
 

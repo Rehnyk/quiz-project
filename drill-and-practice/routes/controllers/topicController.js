@@ -1,16 +1,30 @@
 import * as topicService from "../../services/topicService.js";
 import * as questionService from "../../services/questionService.js";
+import {validasaur} from "../../deps.js";
 
-const createTopic = async ({request, response}) => {
+
+const createTopic = async ({request, response, render}) => {
     const body = request.body({type: "form"});
     const params = await body.value;
 
-    await topicService.createTopic(
-        1,
-        params.get("name"),
-    );
+    const tName = params.get("name");
 
-    response.redirect("/topics");
+    const [passes, errors] = await validasaur.validate({value: tName}, {
+        value: [validasaur.required, validasaur.minLength(1)]
+    });
+
+    if (!passes) {
+        console.log('ERRORS:', errors)
+        render("topicsAll.eta", {topics: await topicService.showTopics(),
+            errors});
+    } else {
+        await topicService.createTopic(
+            1,
+            tName,
+        );
+
+        response.redirect("/topics");
+    }
 };
 
 const showTopics = async ({request, response, render}) => {

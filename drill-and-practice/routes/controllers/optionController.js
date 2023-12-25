@@ -1,21 +1,34 @@
 import * as questionService from "../../services/questionService.js";
 import * as optionService from "../../services/optionService.js";
+import * as topicService from "../../services/topicService.js";
+import {validasaur} from "../../deps.js";
 
-
-
-const createOption = async ({ request, response, params }) => {
-    const body = request.body({ type: "form" });
+const createOption = async ({request, response, params, render}) => {
+    const body = request.body({type: "form"});
     const formParams = await body.value;
 
     const isCorrectTruthy = [true, "true", 1, "1", "on"];
+    const opText = formParams.get("option_text");
 
-    await optionService.createOption(
-        params.qId,
-        formParams.get("option_text"),
-        isCorrectTruthy.includes(formParams.get("is_correct"))
-    );
+    const [passes, errors] = await validasaur.validate({value: opText}, {
+            value: [validasaur.required, validasaur.minLength(1)]
+        });
 
-    response.redirect(`/topics/${params.id}/questions/${params.qId}`);
+    if (!passes) {
+        console.log('ERRORS:', errors)
+        render("question.eta",{ question: await questionService.findQuestionById(params.qId),
+            options: await optionService.showOptions(params.qId),
+            topic: await topicService.findTopicById(params.id),
+            errors});
+    } else {
+        await optionService.createOption(
+            params.qId,
+            opText,
+            isCorrectTruthy.includes(formParams.get("is_correct"))
+        );
+
+        response.redirect(`/topics/${params.id}/questions/${params.qId}`);
+    }
 };
 
 const deleteOption = async ({request, response, params}) => {
@@ -25,5 +38,4 @@ const deleteOption = async ({request, response, params}) => {
 };
 
 
-
-export { createOption, deleteOption };
+export {createOption, deleteOption};

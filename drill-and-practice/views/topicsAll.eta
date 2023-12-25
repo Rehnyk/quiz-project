@@ -9,6 +9,9 @@
     <input class="form-action" type="submit" value="Create"/>
 </form>
 
+<% if (it.errors) { %>
+    <div class="error add-new-validation-err">Value required.</div>
+<% } %>
 
 <h2>Topics</h2>
 

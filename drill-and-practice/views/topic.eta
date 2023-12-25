@@ -13,6 +13,9 @@
     <input class="form-action" type="submit" value="Add"/>
 </form>
 
+<% if (it.errors) { %>
+    <div class="error add-new-validation-err">Value required.</div>
+<% } %>
 
 <h2>Questions</h2>
 

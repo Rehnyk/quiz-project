@@ -8,9 +8,12 @@
 
 <h4>Add Answer</h4>
 
+
 <form class="add-new-element" method="POST"
       action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
+
     <div class="new-answer-field">
+
         <input class="input-answer" type="text" name="option_text" placeholder="New Answer"/>
         <div class="checkbox-div"><input type="checkbox" name="is_correct"/> Correct</div>
 
@@ -18,6 +21,9 @@
     <input class="form-action" type="submit" value="Add"/>
 </form>
 
+<% if (it.errors) { %>
+    <div class="error add-new-validation-err">Value required.</div>
+<% } %>
 
 <h2>Answers</h2>
 
