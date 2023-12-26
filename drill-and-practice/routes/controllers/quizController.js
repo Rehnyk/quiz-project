@@ -34,7 +34,6 @@ const findTopicById = async ({request, response, params, render}) => {
 
 const showQuestion = async ({request, response, render, params}) => {
     if (parseInt(params.qId) === 0) {
-        console.log('NO QUESTIONS')
         render("quizQuestion.eta");
     }
 
@@ -52,7 +51,7 @@ const sendAnswer = async ({request, response, render, user, params}) => {
     if (option.is_correct) {
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/correct`);
     } else {
-        response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect`);
+        response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect?user_answer_id=${params.oId}`);
     }
 };
 
@@ -61,16 +60,22 @@ const correctAnswer = async ({request, response, render, params}) => {
         {
             question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
-            answer: "correct"
+            answerView: "correct"
         });
 };
 
 const wrongAnswer = async ({request, response, render, params}) => {
+    const queryParams = request.url.searchParams;
+
+    const correctAnswers = await optionService.findCorrectAnswer(params.qId);
+    console.log(correctAnswers)
     render("quizQuestion.eta",
         {
             question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
-            answer: "incorrect"
+            answerView: "incorrect",
+            correctAnswer: correctAnswers[0],
+            userAnswerId: queryParams.get("user_answer_id")
         });
 };
 

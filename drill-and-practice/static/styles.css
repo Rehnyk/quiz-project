@@ -52,6 +52,18 @@ h1 {
     margin-right: 5px;
 }
 
+.fa-check {
+    color: green;
+    font-size: 1.3rem;
+    margin-right: 5px;
+}
+
+.fa-xmark {
+    color: red;
+    font-size: 1.3rem;
+    margin-right: 5px;
+}
+
 /******** ERRORS ***********************************************/
 .error {
     color: red;
@@ -302,9 +314,35 @@ ul li a:hover{
     background: #fae4f2;
 }
 
+.after-answer {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.correct-text {
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #008000
+}
+
+.incorrect-text {
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ea0202
+}
+
+.correct-answer {
+    background-color: #dcfadd;
+}
+
+.incorrect-answer {
+    background-color: #fddddd;
+}
+
 .next-question {
     color: #0c0c0c;
-    margin-top: 20px;
     font-size: 1rem;
     border: 1px solid #a8a7a7;
     padding: 6px 10px;

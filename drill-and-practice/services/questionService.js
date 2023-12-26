@@ -30,5 +30,4 @@ const countQuestions = async (topicId) => {
 };
 
 
-
 export { createQuestion, findQuestionById, findQuestions, deleteQuestion, deleteAllTopicQuestions, countQuestions };

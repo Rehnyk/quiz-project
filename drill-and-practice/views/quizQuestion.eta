@@ -6,36 +6,79 @@
     </h1>
 
     <% if (it.options && it.options.length > 0) { %>
-        <ul>
-            <% it.options.forEach(o => { %>
-                <li class="option-item">
-                    <div class="list-item">
-                        [ID:<%= o.id %>] - <%= o.option_text %>
-                    </div>
 
-                    <form method="POST"
-                          action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= o.id %>">
-                        <input class="list-action" type="submit" value="Choose"/>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
+        <% if (!it.answerView) { %>
+
+            <ul>
+                <% it.options.forEach(o => { %>
+                    <li class="option-item">
+                        <div class="list-item">
+                            [ID:<%= o.id %>] - <%= o.option_text %>
+                        </div>
+
+                        <form method="POST"
+                              action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= o.id %>">
+                            <input class="list-action" type="submit" value="Choose"/>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+
+        <% } else { %>
+
+            <div class="after-answer">
+
+                <% if (it.answerView === "correct") { %>
+
+                    <ul>
+                        <% it.options.forEach(o => { %>
+                            <li class="option-item ">
+
+                                <div class="list-item <%= o.is_correct ? 'correct-answer' : '' %>">
+                                    [ID:<%= o.id %>] - <%= o.option_text %>
+
+                                    <% if (o.is_correct) { %>
+                                        <i class="fa-solid fa-check"></i>
+                                    <% } %>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+
+                    <p class="correct-text">Correct!</p>
+
+                <% } else if (it.answerView === "incorrect") { %>
+                    <ul>
+                        <% it.options.forEach(o => { %>
+                            <li class="option-item ">
+
+                                <div class="list-item <%= o.is_correct ? 'correct-answer' : '' %> <%= parseInt(o.id) === parseInt(it.userAnswerId) ? 'incorrect-answer' : '' %>">
+                                    [ID:<%= o.id %>] - <%= o.option_text %>
+
+                                    <% if (o.is_correct) { %>
+                                        <i class="fa-solid fa-check"></i>
+                                    <% } %>
+
+                                    <% if (parseInt(o.id) === parseInt(it.userAnswerId)) { %>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    <% } %>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                    <p class="incorrect-text">Incorrect!</p>
+
+                        <p>The correct answer was: <strong><%= it.correctAnswer.option_text %></strong></p>
+
+                <% } %>
+                <a href="/quiz/<%= it.question.topic_id %>" class="next-question">Next question</a>
+            </div>
+        <% } %>
 
     <% } else { %>
-        <p>No answers.</p>
+        <p>There are no answers for this question.</p>
     <% } %>
 
-
-
-    <% if (it.answer) { %>
-        <% if (it.answer === "correct") { %>
-            Correct
-        <% } else if (it.answer === "incorrect") { %>
-            <p>Incorrect!</p>
-            <p>The correct option was ..... </p>
-        <% } %>
-        <a href="/quiz/<%= it.question.topic_id %>" class="next-question">Next question</a>
-    <% } %>
 
 <% } else { %>
     <div class="quiz no-questions">

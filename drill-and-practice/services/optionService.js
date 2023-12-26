@@ -28,4 +28,8 @@ const addQuizAnswer = async (userId, qId, aId) => {
       (user_id, question_id, question_answer_option_id) VALUES (${userId}, ${qId}, ${aId})`;
 };
 
-export { createOption, showOptions, deleteOption, deleteAllQuestionOptions, findOptionById, addQuizAnswer };
+const findCorrectAnswer = async (qId) => {
+    return await sql`SELECT * FROM question_answer_options WHERE question_id = ${qId} AND is_correct IS TRUE`;
+};
+
+export { createOption, showOptions, deleteOption, deleteAllQuestionOptions, findOptionById, addQuizAnswer, findCorrectAnswer };
