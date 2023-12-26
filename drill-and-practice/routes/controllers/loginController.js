@@ -68,7 +68,9 @@ const processLogin = async ({request, response, state, render}) => {
 
 const logoutUser = async ({request, response, state}) => {
     await state.session.set("authenticated", false);
+    await state.session.set("user", null);
     userData.email = "";
+    userData.password = "";
     response.redirect("/auth/login");
 };
 

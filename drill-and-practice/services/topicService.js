@@ -19,5 +19,15 @@ const deleteTopic = async (id) => {
    await sql`DELETE FROM topics WHERE id = ${id}`;
 };
 
+const countAllTopics = async () => {
+    const rows = await sql`SELECT COUNT (*) AS count FROM topics`;
+    return rows[0].count;
+};
 
-export { createTopic, showTopics, findTopicById, deleteTopic};
+export {
+    createTopic,
+    showTopics,
+    findTopicById,
+    deleteTopic,
+    countAllTopics
+};

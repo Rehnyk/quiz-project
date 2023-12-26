@@ -1,10 +1,14 @@
-const showMain = ({ render}) => {
+import * as topicService from "../../services/topicService.js";
+import * as questionService from "../../services/questionService.js";
+import * as optionService from "../../services/optionService.js";
+
+
+const showMain = async ({ render, user}) => {
   render("main.eta", {
-    topics: 20,
-    questions: 60,
-    answers: 250,
-    correct: 100,
-    incorrect: 150
+    topics: await topicService.countAllTopics(),
+    questions: await questionService.countAllQuestions(),
+    answers: await optionService.countAllAnswers(),
+    user
   });
 };
 

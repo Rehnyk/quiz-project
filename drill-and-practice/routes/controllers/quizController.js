@@ -2,22 +2,20 @@ import * as topicService from "../../services/topicService.js";
 import * as questionService from "../../services/questionService.js";
 import * as optionService from "../../services/optionService.js";
 
-const showTopics = async ({request, response, render}) => {
+const showTopics = async ({request, response, render, user}) => {
     const topics = await topicService.showTopics();
 
     const topicsWithQuestions = await Promise.all(
         topics.map(async (topic) => ({
             ...topic,
-            numberOfQuestions: await questionService.countQuestions(topic.id),
+            numberOfQuestions: await questionService.countTopicQuestions(topic.id)
         }))
     );
 
-    render("quiz.eta", {
-        topics: topicsWithQuestions,
-    });
+    render("quiz.eta", {topics: topicsWithQuestions, user});
 };
 
-const findTopicById = async ({request, response, params, render}) => {
+const findTopicById = async ({request, response, params }) => {
     const questions = await questionService.findQuestions(params.tId);
 
     if (!questions.length) {
@@ -32,15 +30,16 @@ const findTopicById = async ({request, response, params, render}) => {
     }
 };
 
-const showQuestion = async ({request, response, render, params}) => {
+const showQuestion = async ({request, response, render, params, user}) => {
     if (parseInt(params.qId) === 0) {
-        render("quizQuestion.eta");
+        render("quizQuestion.eta", user);
     }
 
     render("quizQuestion.eta",
         {
             question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
+            user
         });
 };
 
@@ -55,16 +54,17 @@ const sendAnswer = async ({request, response, render, user, params}) => {
     }
 };
 
-const correctAnswer = async ({request, response, render, params}) => {
+const correctAnswer = async ({request, response, render, params, user}) => {
     render("quizQuestion.eta",
         {
             question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
-            answerView: "correct"
+            answerView: "correct",
+            user
         });
 };
 
-const wrongAnswer = async ({request, response, render, params}) => {
+const wrongAnswer = async ({request, response, render, params, user}) => {
     const queryParams = request.url.searchParams;
 
     const correctAnswers = await optionService.findCorrectAnswer(params.qId);
@@ -75,7 +75,8 @@ const wrongAnswer = async ({request, response, render, params}) => {
             options: await optionService.showOptions(params.qId),
             answerView: "incorrect",
             correctAnswer: correctAnswers[0],
-            userAnswerId: queryParams.get("user_answer_id")
+            userAnswerId: queryParams.get("user_answer_id"),
+            user
         });
 };
 

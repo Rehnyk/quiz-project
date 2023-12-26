@@ -3,7 +3,7 @@ import * as optionService from "../../services/optionService.js";
 import * as topicService from "../../services/topicService.js";
 import {validasaur} from "../../deps.js";
 
-const createOption = async ({request, response, params, render}) => {
+const createOption = async ({request, response, params, render, user}) => {
     const body = request.body({type: "form"});
     const formParams = await body.value;
 
@@ -19,7 +19,8 @@ const createOption = async ({request, response, params, render}) => {
         render("question.eta",{ question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
             topic: await topicService.findTopicById(params.id),
-            errors});
+            errors,
+            user});
     } else {
         await optionService.createOption(
             params.qId,

@@ -4,14 +4,21 @@
 <h1>Quiz app</h1>
 
 <p>Brief description of the application, application statistics, and links for registration and login.
-    The application statistics show the total number of topics, questions, and question answers (i.e. answers from users).
+    The application statistics show the total number of topics, questions, and question answers (i.e. answers from
+    users).
 </p>
 
 
+<p> Topics: <%= it.topics %>
 
-Topics:         <%= it.topics %>
-Questions:        <%= it.questions %>
-Number of answers:         <%= it.answers %>
+</p>
 
-Correctly answered:         <%= it.correct %>
-Wrongly answered:         <%= it.incorrect %>
+<p>Questions: <%= it.questions %>
+
+</p>
+
+<p> Number of answers: <%= it.answers %>
+
+</p>
+
+

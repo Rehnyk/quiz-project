@@ -23,7 +23,8 @@ const createTopic = async ({request, response, render, user}) => {
         if (!passes) {
             console.log('ERRORS:', errors)
             render("topicsAll.eta", {topics: await topicService.showTopics(),
-                errors});
+                errors,
+                user});
         } else {
             await topicService.createTopic(
                 user.id,
@@ -39,11 +40,12 @@ const showTopics = async ({request, response, render, user}) => {
     render("topicsAll.eta", {topics: await topicService.showTopics(), user});
 };
 
-const findTopicById = async ({request, response, params, render}) => {
+const findTopicById = async ({request, response, params, render, user}) => {
     render("topic.eta",
         {
             topic: await topicService.findTopicById(params.id),
-            questions: await questionService.findQuestions(params.id)
+            questions: await questionService.findQuestions(params.id),
+            user
         });
 };
 
