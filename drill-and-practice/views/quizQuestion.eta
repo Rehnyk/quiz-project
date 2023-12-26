@@ -1,34 +1,45 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>
-    <%= it.question.question_text %>
-</h1>
+<% if (it.question) { %>
+    <h1>
+        <%= it.question.question_text %>
+    </h1>
 
-<% if (it.options && it.options.length > 0) { %>
-    <ul>
-        <% it.options.forEach(o => { %>
-            <li class="option-item">
-                <div class="list-item">
-                    [ID:<%= o.id %>] - <%= o.option_text %>
-                </div>
+    <% if (it.options && it.options.length > 0) { %>
+        <ul>
+            <% it.options.forEach(o => { %>
+                <li class="option-item">
+                    <div class="list-item">
+                        [ID:<%= o.id %>] - <%= o.option_text %>
+                    </div>
 
-                <form method="POST"
-                      action="/quiz">
-                    <input class="list-action" type="submit" value="Choose"/>
-                </form>
-            </li>
-        <% }); %>
-    </ul>
+                    <form method="POST"
+                          action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= o.id %>">
+                        <input class="list-action" type="submit" value="Choose"/>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+
+    <% } else { %>
+        <p>No answers.</p>
+    <% } %>
+
+
+
+    <% if (it.answer) { %>
+        <% if (it.answer === "correct") { %>
+            Correct
+        <% } else if (it.answer === "incorrect") { %>
+            <p>Incorrect!</p>
+            <p>The correct option was ..... </p>
+        <% } %>
+        <a href="/quiz/<%= it.question.topic_id %>" class="next-question">Next question</a>
+    <% } %>
 
 <% } else { %>
-    <p>No answers.</p>
+    <div class="quiz no-questions">
+        <p>No questions created in this topic.</p>
+        <a href="/quiz">Choose different topic</a>
+    </div>
 <% } %>
-
-<% if (it.answer && it.answer.correct) { %>
-    Correct
-<% } else { %>
-    <p>Incorrect!</p>
-    <p>The correct option was ..... </p>
-<% } %>
-
-<a href="/quiz/:tId">Next question</a>

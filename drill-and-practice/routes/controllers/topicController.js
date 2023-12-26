@@ -33,8 +33,6 @@ const createTopic = async ({request, response, render, user}) => {
             response.redirect("/topics");
         }
     }
-
-
 };
 
 const showTopics = async ({request, response, render, user}) => {

@@ -3,15 +3,20 @@
 <h2>Quiz Topics</h2>
 
 <% if (it.topics && it.topics.length > 0) { %>
+    <div class="topics-list">
+    <div class="num-descr">Number of questions</div>
 
     <ul>
         <% it.topics.forEach(t => { %>
             <li class="topic-item" data-task-id="<%= t.id %>">
-                <a class="list-item-link" href="/quiz/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
+                <a class="list-item-link" href="/quiz/<%= t.id %>">
+                    [ID: <%= t.id %>] - <%= t.name %>
+                    <p class="quest-count"><%= t.numberOfQuestions %></p>
+                </a>
             </li>
         <% }); %>
     </ul>
-
+    </div>
 <% } else { %>
 
     <p>No topics yet. </p>

@@ -110,7 +110,7 @@ h4{
     background: #8b8291;
 }
 
-/** Answers **/
+/**** Answers ****/
 .new-answer-field {
     display: flex;
     width: 100%;
@@ -252,6 +252,70 @@ ul li a:hover{
 
 .auth-link {
     color: black;
+}
+
+/******** QUIZ ****************************************************/
+.topics-list {
+    position: relative;
+    top: -50px;
+}
+.num-descr {
+    width: 90px;
+    font-size: 0.8rem;
+    position: relative;
+    margin-left: auto;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.quest-count {
+    margin: 0 15px ;
+    width: 10px;
+    float: right;
+}
+
+
+.no-questions {
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 400px;
+    font-size: 1.3rem;
+}
+
+.no-questions a {
+    color: #0c0c0c;
+    margin-top: 20px;
+    font-size: 1rem;
+    border: 1px solid #a8a7a7;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.no-questions a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    background: #fae4f2;
+}
+
+.next-question {
+    color: #0c0c0c;
+    margin-top: 20px;
+    font-size: 1rem;
+    border: 1px solid #a8a7a7;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.next-question:hover {
+    text-decoration: none;
+    color: #0c0c0c;
+    background: #e5e3e3;
 }
 
 /******** NAVIGATION BAR ******************************************/
