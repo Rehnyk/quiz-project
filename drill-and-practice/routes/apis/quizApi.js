@@ -4,8 +4,6 @@ import * as optionService from "../../services/optionService.js"
 const findQuestion = async ({request, response}) => {
     const question = await questionService.findRandomQuestion();
 
-    console.log('QUESTION', question)
-
     if (!question) {
         response.body = {};
     } else {

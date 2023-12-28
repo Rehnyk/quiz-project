@@ -1,5 +1,3 @@
-
-
 const restrictedPaths = ["/topics", "/quiz"];
 
 const authMiddleware = async (context, next) => {
@@ -19,6 +17,5 @@ const authMiddleware = async (context, next) => {
         await next();
     }
 };
-
 
 export { authMiddleware };
