@@ -62,9 +62,8 @@ const correctAnswer = async ({request, response, render, params, user}) => {
 
 const wrongAnswer = async ({request, response, render, params, user}) => {
     const queryParams = request.url.searchParams;
-
     const correctAnswers = await optionService.findCorrectAnswer(params.qId);
-    console.log(correctAnswers)
+
     render("quizQuestion.eta",
         {
             question: await questionService.findQuestionById(params.qId),

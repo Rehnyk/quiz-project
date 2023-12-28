@@ -7,14 +7,32 @@ const userValidationRules = {
     password: [validasaur.required, validasaur.minLength(4)]
 }
 
-let userData = {
-    email: "",
-    password: ""
-}
-
 const processLogin = async ({request, response, state, render}) => {
+    const usr = await state.session.get("user");
+    if(usr && await state.session.get('authenticated')){
+        response.redirect("/");
+    }
     const body = request.body({type: "form"});
     const params = await body.value;
+
+    const redirectToLoginPage = async ({
+        status,
+        email,
+        errors
+                                       })=>{
+        response.status = status;
+        await state.session.set('invalidUser', {
+            email,
+            errors
+        });
+        response.redirect("/auth/login");
+    };
+
+    const userData = {
+        email: "",
+        password: ""
+    };
+    delete userData.body;
 
     userData.email = params.get("email");
     userData.password = params.get("password");
@@ -23,36 +41,36 @@ const processLogin = async ({request, response, state, render}) => {
         userData, userValidationRules
     );
 
+
     if (!passes) {
-        console.log('VALIDATION ERROR:', errors);
         userData.errors = errors;
         response.status = 403;
-        console.log('USER DATA', userData)
         render("login.eta", userData);
     } else {
 
         const userFromDB = await userService.findUserByEmail(userData.email);
 
         if (userFromDB.length !== 1) {
-            console.log('NO USER FOUND')
-            userData.errors = {authentication: "Wrong email or password."};
-            response.status = 400;
-            response.redirect("/auth/login");
-            return;
+            return redirectToLoginPage({
+                errors: {authentication: "Wrong email or password."},
+                status: 400,
+                email: userData.email
+            });
         }
 
         const user = userFromDB[0];
 
-        const passwordMatches = await bcrypt.compare(
+
+        const passwordMatches = bcrypt.compare(
             userData.password, user.password,
         );
 
         if (!passwordMatches) {
-            console.log('WRONG PASSWORD')
-            userData.errors = {authentication: "Wrong email or password."};
-            response.status = 400;
-            response.redirect("/auth/login");
-            return;
+            return redirectToLoginPage({
+                errors: {authentication: "Wrong email or password."},
+                status: 400,
+                email: userData.email
+            });
         }
 
         await state.session.set("authenticated", true);
@@ -62,19 +80,31 @@ const processLogin = async ({request, response, state, render}) => {
             admin: user.admin
         });
 
+        userData.email = "";
+        userData.password = "";
+
         response.redirect("/topics");
     }
 };
 
 const logoutUser = async ({request, response, state}) => {
-    await state.session.set("authenticated", false);
-    await state.session.set("user", null);
-    userData.email = "";
-    userData.password = "";
+    await state.session.deleteSession();
     response.redirect("/auth/login");
 };
 
-const showLoginForm = ({render}) => {
+const showLoginForm = async ({state, render, response}) => {
+    const user = await state.session.get("user");
+    if(user && await state.session.get('authenticated')){
+        response.redirect("/");
+    }
+    const invalidUser = await state.session.get('invalidUser');
+    await state.session.set('invalidUser', null);
+    const userData = {
+        email: invalidUser?.email || "",
+        password: "",
+        errors: invalidUser?.errors || []
+    };
+
     render("login.eta", userData);
 };
 

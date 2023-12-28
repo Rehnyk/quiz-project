@@ -8,6 +8,10 @@ const userValidationRules = {
 }
 
 const registerUser = async ({request, response, render}) => {
+    const usr = await state.session.get("user");
+    if(usr && await state.session.get('authenticated')){
+        response.redirect("/");
+    }
     const body = request.body({type: "form"});
     const params = await body.value;
 
@@ -21,26 +25,29 @@ const registerUser = async ({request, response, render}) => {
     );
 
     if (!passes) {
-        console.log('VALIDATION ERROR:', errors);
         userData.errors = errors;
         response.status = 403;
-        console.log('USER DATA', userData)
         render("registration.eta", userData);
+    }
 
-    } else if (await userService.findUserByEmail(userData.email).length > 0 ) {
-        console.log('USER DATA 1:', userData)
+    const user = await userService.findUserByEmail(userData.email);
+
+
+    if (user.length > 0 ) {
         userData.errors = {authentication: "User already exists."}
-        console.log('USER DATA 2:', userData)
         render("registration.eta", userData);
 
     } else {
-        console.log('ADD USER:')
         await userService.addUser(userData.email, await bcrypt.hash(userData.password));
         response.redirect("/auth/login");
     }
 };
 
-const showRegistrationForm = async ({render}) => {
+const showRegistrationForm = async ({render, state, response}) => {
+    const user = await state.session.get("user");
+    if(user && await state.session.get('authenticated')){
+        response.redirect("/");
+    }
     render("registration.eta", {email: ""});
 };
 
