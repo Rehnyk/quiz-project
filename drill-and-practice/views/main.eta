@@ -9,16 +9,16 @@
 </p>
 
 
-<p> Topics: <%= it.topics %>
-
+<p>
+    Topics: <%= it.topics %>
 </p>
 
-<p>Questions: <%= it.questions %>
-
+<p>
+    Questions: <%= it.questions %>
 </p>
 
-<p> Number of answers: <%= it.answers %>
-
+<p>
+    Number of answers: <%= it.answers %>
 </p>
 
 

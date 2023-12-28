@@ -15,18 +15,13 @@ const showTopics = async ({request, response, render, user}) => {
     render("quiz.eta", {topics: topicsWithQuestions, user});
 };
 
-const findTopicById = async ({request, response, params }) => {
-    const questions = await questionService.findQuestions(params.tId);
+const findTopicById = async ({request, response, params}) => {
+    const question = await questionService.findRandomQuestionInTopic(params.tId);
 
-    if (!questions.length) {
+    if (!question) {
         response.redirect(`/quiz/${params.tId}/questions/0`);
     } else {
-        const num = Math.floor(Math.random() * questions.length);
-        const randomQuestion = questions[num];
-        console.log('QUESTION:', randomQuestion)
-
-        response.redirect(`/quiz/${randomQuestion.topic_id}/questions/${randomQuestion.id}`);
-
+        response.redirect(`/quiz/${params.tId}/questions/${question.id}`);
     }
 };
 
@@ -51,6 +46,7 @@ const sendAnswer = async ({request, response, render, user, params}) => {
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/correct`);
     } else {
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect?user_answer_id=${params.oId}`);
+        // response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect`)
     }
 };
 

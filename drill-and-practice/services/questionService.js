@@ -34,6 +34,15 @@ const countAllQuestions = async () => {
     return rows[0].count;
 };
 
+const findRandomQuestion = async () => {
+    const rows = await sql`SELECT * FROM questions ORDER BY random() LIMIT 1`;
+    return rows[0];
+};
+
+const findRandomQuestionInTopic = async (topicId) => {
+    const rows = await sql`SELECT * FROM questions WHERE topic_id = ${topicId} ORDER BY random() LIMIT 1`;
+    return rows[0];
+};
 
 export {
     createQuestion,
@@ -42,5 +51,7 @@ export {
     deleteQuestion,
     deleteAllTopicQuestions,
     countTopicQuestions,
-    countAllQuestions
+    countAllQuestions,
+    findRandomQuestion,
+    findRandomQuestionInTopic
 };

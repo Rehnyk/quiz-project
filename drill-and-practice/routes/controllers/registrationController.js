@@ -28,10 +28,13 @@ const registerUser = async ({request, response, render}) => {
         render("registration.eta", userData);
 
     } else if (await userService.findUserByEmail(userData.email).length > 0 ) {
-        userData.errors = {authentication: "User already exist."}
+        console.log('USER DATA 1:', userData)
+        userData.errors = {authentication: "User already exists."}
+        console.log('USER DATA 2:', userData)
         render("registration.eta", userData);
 
     } else {
+        console.log('ADD USER:')
         await userService.addUser(userData.email, await bcrypt.hash(userData.password));
         response.redirect("/auth/login");
     }
