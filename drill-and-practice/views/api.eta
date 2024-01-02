@@ -1,0 +1,44 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="content-box">
+
+    <h1 class="api-header">Random Question API</h1>
+
+    <p>The Random Question API allows users to retrieve random questions and submit answers. This document provides
+        details on the API endpoints, request formats, and response structures.</p>
+
+
+    <h4 class="api-header">Retrieve Random Question</h4>
+
+    <p><strong><code>GET</code></strong> request to <code> /api/questions/random</code></p>
+
+    <p>This returns a randomly selected question as a JSON document with the following attributes:</p>
+
+    <pre><code class="json">{
+  "questionId": 1,
+  "questionText": "How much is 1+1?",
+  "answerOptions": [
+    {"optionId": 1, "optionText": "2"},
+    {"optionId": 2, "optionText": "4"},
+    {"optionId": 3, "optionText": "6"}
+  ]
+}</code></pre>
+
+        <h4 class="api-header">Submit Answer</h4>
+
+        <p><strong><code>POST</code></strong> request to <code> /api/questions/answer</code></p>
+
+        <p>Request should include JSON document with the answer like this:</p>
+
+        <pre><code class="json">{
+  "questionId": 1,
+  "optionId": 3,
+}</code></pre>
+
+        <p>App will verify whether the answer was correct and sends following response:</p>
+
+        <pre><code class="json">{"correct": true}    ||   {"correct": false}</code></pre>
+
+
+
+</div>

@@ -1,0 +1,155 @@
+h1 {
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.nav-back-link {
+    font-size: 0.9rem;
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    margin: 15px -80px 0 auto;
+    color: black;
+    align-items: center;
+}
+
+.nav-back-link:hover {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-back-link i {
+    margin-right: 5px;
+}
+
+/******** FORM FOR ADDING NEW ITEMS *******************************/
+h4{
+    margin-top: 40px;
+}
+
+.add-new-element {
+    display: flex;
+    width: 100%;
+}
+
+.form-field {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid grey;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-action{
+    border: 1px solid grey;
+    border-left: none;
+    width: 120px;
+    font-weight: bold;
+    color: white;
+    background: #363636;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.form-action:hover{
+    color: black;
+    background: #8b8291;
+}
+
+/**** Answers ****/
+.new-answer-field {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px;
+    border: 1px solid grey;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input-answer {
+    border: none;
+    outline: none;
+    width: 90%;
+    background: transparent;
+}
+
+.checkbox-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 65px;
+    color: #2a2828;
+    margin-right: 15px;
+    font-size: 0.85rem;
+}
+
+/******** LIST ITEMS **********************************************/
+h2 {
+    margin: 20px 0 20px 0;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+ul li a {
+    padding: 8px;
+    margin-right: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid grey;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+ul li a:hover{
+    text-decoration: none;
+    background-color: rgb(238, 235, 233);
+    color: black;
+}
+
+
+.list-action {
+    border: 1px solid grey;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    background: #dad9d9;
+}
+
+.list-action:hover {
+    color: white;
+    background: #363636;
+}
+
+/** Answers **/
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-right: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid grey;
+    border-radius: 8px;
+    color: black;
+}

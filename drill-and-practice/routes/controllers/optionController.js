@@ -39,4 +39,7 @@ const deleteOption = async ({request, response, params}) => {
 };
 
 
-export {createOption, deleteOption};
+export {
+    createOption,
+    deleteOption
+};

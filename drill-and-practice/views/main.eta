@@ -1,24 +1,43 @@
 <% layout("./layouts/layout.eta") %>
 
+<div class="content-box">
 
-<h1>Quiz app</h1>
+    <h1 class="main-header"> <i class="fa-regular fa-square-check"></i> Quiz app</h1>
 
-<p>Brief description of the application, application statistics, and links for registration and login.
-    The application statistics show the total number of topics, questions, and question answers (i.e. answers from
-    users).
-</p>
+    <p>
+        Quiz app is designed for creating questions on various topics and answering a quizzes.
+    </p>
+    <p>
+        It allows users to create different questions and add answers to the predefined topics.
+        Users can also delete the questions and answers.
+    </p>
+    <p>
+        Users can then do the quizzes on the chosen topics, where they answer previously created questions.
 
+    </p>
+    <p>
+        App also offers option of the API so the anybody can add the quiz possibility to their own apps.
+    </p>
+    <div class="statistics">
+        <p>
+            Topics: <%= it.topics %>
+        </p>
 
-<p>
-    Topics: <%= it.topics %>
-</p>
+        <p>
+            Questions: <%= it.questions %>
+        </p>
 
-<p>
-    Questions: <%= it.questions %>
-</p>
+        <p>
+            Number of answers: <%= it.answers %>
+        </p>
+    </div>
 
-<p>
-    Number of answers: <%= it.answers %>
-</p>
+    <div class="main-auth">
+    <% if (!it.user) { %>
+            <a href="/auth/register" class="auth-link-btn">Register</a>
+            <a href="/auth/login" class="auth-link-btn">Login</a>
+    <% } %>
 
+    </div>
 
+</div>

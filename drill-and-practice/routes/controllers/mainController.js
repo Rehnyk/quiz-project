@@ -12,4 +12,10 @@ const showMain = async ({ render, user}) => {
   });
 };
 
-export { showMain };
+const showAPI= async ({ render, user}) => {
+  render("api.eta", {
+    user
+  });
+};
+
+export { showMain, showAPI };
