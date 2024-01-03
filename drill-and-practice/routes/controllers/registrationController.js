@@ -7,7 +7,7 @@ const userValidationRules = {
     password: [validasaur.required, validasaur.minLength(4)]
 }
 
-const registerUser = async ({request, response, render}) => {
+const registerUser = async ({request, response, render, state}) => {
     const usr = await state.session.get("user");
     if(usr && await state.session.get('authenticated')){
         response.redirect("/");

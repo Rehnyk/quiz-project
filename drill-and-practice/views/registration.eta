@@ -42,16 +42,4 @@
 
     <a class="auth-link" href="/auth/login">Already registered? Login here.</a>
 
-
-    <% if (it.users) { %>
-        <ul>
-            <% it.users.forEach(u => { %>
-                <li>
-                    <%= u.email %>
-                </li>
-            <% }); %>
-
-        </ul>
-
-    <% }; %>
 </div>

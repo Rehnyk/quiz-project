@@ -1,8 +1,12 @@
 <div class="nav-bar">
     <div class="app-nav">
         <a href="/"><i class="fa-solid fa-house"></i></a>
+
+        <% if (it.user) { %>
         <a href="/topics">Topics</a>
         <a href="/quiz">Quiz</a>
+        <% } %>
+
         <a href="/api/doc">API</a>
     </div>
 
