@@ -35,10 +35,12 @@ const registerUser = async ({request, response, render, state}) => {
 
     if (user.length > 0 ) {
         userData.errors = {authentication: "User already exists."}
+        response.status = 400;
         render("registration.eta", userData);
 
     } else {
         await userService.addUser(userData.email, await bcrypt.hash(userData.password));
+        response.status = 201;
         response.redirect("/auth/login");
     }
 };

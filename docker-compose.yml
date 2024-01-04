@@ -42,15 +42,3 @@ services:
     volumes:
       - ./e2e-playwright/tests:/e2e-playwright/tests
 
-  deno-tests:
-    entrypoint: "/bin/true" # Prevent startup on docker-compose up
-    build: drill-and-practice/tests
-    image: deno-tests
-    restart: "no"
-    depends_on:
-      - drill-and-practice
-    volumes:
-      - ./tests:/app/tests
-      - ./drill-and-practice:/app/drill-and-practice
-    env_file:
-      - project.env
