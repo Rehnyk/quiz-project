@@ -108,4 +108,8 @@ const showLoginForm = async ({state, render, response}) => {
     render("login.eta", userData);
 };
 
-export {processLogin, showLoginForm, logoutUser};
+export {
+    processLogin,
+    showLoginForm,
+    logoutUser
+};

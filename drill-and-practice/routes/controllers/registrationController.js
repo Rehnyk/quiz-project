@@ -53,4 +53,7 @@ const showRegistrationForm = async ({render, state, response}) => {
     render("registration.eta", {email: ""});
 };
 
-export {registerUser, showRegistrationForm};
+export {
+    registerUser,
+    showRegistrationForm
+};
