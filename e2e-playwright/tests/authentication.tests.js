@@ -35,10 +35,33 @@ test('Registration attempt - user is already registered.', async ({ page }) => {
 });
 
 
+test('Registration with missing email and password', async ({ page }) => {
+    await page.goto('/auth/register');
+
+    await page.click('input[type=submit]');
+
+    const emailError = await page.textContent('.error:has-text("Email is required.")');
+    const passwordError = await page.textContent('.error:has-text("Password is required.")');
+
+    expect(emailError).toContain('Email is required.');
+    expect(passwordError).toContain('Password is required.');
+});
+
+test('Registration with password less than 4 characters', async ({ page }) => {
+    await page.goto('/auth/register');
+
+    await page.fill('input[name=email]', 'test@example.com');
+    await page.fill('input[name=password]', '123');
+    await page.click('input[type=submit]');
+
+    const passwordError = await page.textContent('.error:has-text("Password must be at least 4 characters.")');
+    expect(passwordError).toContain('Password must be at least 4 characters.');
+});
+
 
 test('Log in user.', async ({ page }) => {
-
     await page.goto('/auth/login');
+
     await page.locator('input[type="email"]').type(registerUser.email);
     await page.locator('input[type="password"]').type(registerUser.password);
     await page.click('input[type="submit"]:has-text("Login")');
@@ -97,6 +120,28 @@ test('Login attempt with wrong password shows error message.', async ({ page }) 
     expect(errorMessage).toContain('Wrong email or password.');
 });
 
+test('Login with missing email and password', async ({ page }) => {
+    await page.goto('/auth/register');
+
+    await page.click('input[type=submit]');
+
+    const emailError = await page.textContent('.error:has-text("Email is required.")');
+    const passwordError = await page.textContent('.error:has-text("Password is required.")');
+
+    expect(emailError).toContain('Email is required.');
+    expect(passwordError).toContain('Password is required.');
+});
+
+test('Login with password less than 4 characters', async ({ page }) => {
+    await page.goto('/auth/login');
+
+    await page.fill('input[name=email]', 'test@example.com');
+    await page.fill('input[name=password]', '123');
+    await page.click('input[type=submit]');
+
+    const passwordError = await page.textContent('.error:has-text("Password must be at least 4 characters.")');
+    expect(passwordError).toContain('Password must be at least 4 characters.');
+});
 
 
 

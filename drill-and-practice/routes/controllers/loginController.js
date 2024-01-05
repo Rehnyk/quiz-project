@@ -7,23 +7,20 @@ const userValidationRules = {
     password: [validasaur.required, validasaur.minLength(4)]
 }
 
-const processLogin = async ({request, response, state, render}) => {
+const loginUser = async ({ request, response, state, render }) => {
     const usr = await state.session.get("user");
     if(usr && await state.session.get('authenticated')){
         response.redirect("/");
     }
+
     const body = request.body({type: "form"});
     const params = await body.value;
 
-    const redirectToLoginPage = async ({
-        status,
-        email,
-        errors
-                                       })=>{
-        response.status = status;
+    const wrongInfoHelper = async ()=>{
         await state.session.set('invalidUser', {
-            email,
-            errors
+            errors: { authentication: "Wrong email or password." },
+            status: 400,
+            email: userData.email
         });
         response.redirect("/auth/login");
     };
@@ -32,7 +29,6 @@ const processLogin = async ({request, response, state, render}) => {
         email: "",
         password: ""
     };
-    delete userData.body;
 
     userData.email = params.get("email");
     userData.password = params.get("password");
@@ -40,7 +36,6 @@ const processLogin = async ({request, response, state, render}) => {
     const [passes, errors] = await validasaur.validate(
         userData, userValidationRules
     );
-
 
     if (!passes) {
         userData.errors = errors;
@@ -51,26 +46,17 @@ const processLogin = async ({request, response, state, render}) => {
         const userFromDB = await userService.findUserByEmail(userData.email);
 
         if (userFromDB.length !== 1) {
-            return redirectToLoginPage({
-                errors: {authentication: "Wrong email or password."},
-                status: 400,
-                email: userData.email
-            });
+            return wrongInfoHelper();
         }
 
         const user = userFromDB[0];
 
+        const passwordMatches = await bcrypt.compare(
+            userData.password, user.password );
 
-        const passwordMatches = bcrypt.compare(
-            userData.password, user.password,
-        );
 
         if (!passwordMatches) {
-            return redirectToLoginPage({
-                errors: {authentication: "Wrong email or password."},
-                status: 400,
-                email: userData.email
-            });
+            return wrongInfoHelper();
         }
 
         await state.session.set("authenticated", true);
@@ -109,7 +95,7 @@ const showLoginForm = async ({state, render, response}) => {
 };
 
 export {
-    processLogin,
+    loginUser,
     showLoginForm,
     logoutUser
 };

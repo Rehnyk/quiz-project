@@ -9,9 +9,11 @@ const userValidationRules = {
 
 const registerUser = async ({request, response, render, state}) => {
     const usr = await state.session.get("user");
+
     if(usr && await state.session.get('authenticated')){
         response.redirect("/");
     }
+
     const body = request.body({type: "form"});
     const params = await body.value;
 
@@ -28,20 +30,21 @@ const registerUser = async ({request, response, render, state}) => {
         userData.errors = errors;
         response.status = 403;
         render("registration.eta", userData);
-    }
-
-    const user = await userService.findUserByEmail(userData.email);
-
-
-    if (user.length > 0 ) {
-        userData.errors = {authentication: "User already exists."}
-        response.status = 400;
-        render("registration.eta", userData);
-
     } else {
-        await userService.addUser(userData.email, await bcrypt.hash(userData.password));
-        response.status = 201;
-        response.redirect("/auth/login");
+
+        const user = await userService.findUserByEmail(userData.email);
+
+
+        if (user.length > 0) {
+            userData.errors = {authentication: "User already exists."}
+            response.status = 400;
+            render("registration.eta", userData);
+
+        } else {
+            await userService.addUser(userData.email, await bcrypt.hash(userData.password));
+            response.status = 201;
+            response.redirect("/auth/login");
+        }
     }
 };
 

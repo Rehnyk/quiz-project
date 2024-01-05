@@ -32,7 +32,7 @@ router.post("/topics/:tId/questions/:qId/options/:oId/delete", optionController.
 router.get("/auth/register", registrationController.showRegistrationForm);
 router.post("/auth/register", registrationController.registerUser);
 router.get("/auth/login", loginController.showLoginForm);
-router.post("/auth/login", loginController.processLogin);
+router.post("/auth/login", loginController.loginUser);
 router.get("/auth/logout", loginController.logoutUser)
 
 
