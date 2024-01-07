@@ -7,7 +7,7 @@
         <a href="/quiz">Quiz</a>
         <% } %>
 
-        <a href="/api/doc">API</a>
+        <a href="/api/doc">{ } API</a>
     </div>
 
 

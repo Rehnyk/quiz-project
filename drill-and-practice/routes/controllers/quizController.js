@@ -46,7 +46,7 @@ const sendAnswer = async ({request, response, user, params}) => {
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/correct`);
     } else {
         response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect?user_answer_id=${params.oId}`);
-        // response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect`)
+        //response.redirect(`/quiz/${params.tId}/questions/${params.qId}/incorrect`)
     }
 };
 
