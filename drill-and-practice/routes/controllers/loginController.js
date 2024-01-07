@@ -51,10 +51,11 @@ const loginUser = async ({ request, response, state, render }) => {
 
         const user = userFromDB[0];
 
+        // noinspection ES6RedundantAwait
         const passwordMatches = await bcrypt.compare(
             userData.password, user.password );
 
-
+        console.log(passwordMatches)
         if (!passwordMatches) {
             return wrongInfoHelper();
         }
