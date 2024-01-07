@@ -11,6 +11,7 @@ const showOptions = async (questionId) => {
 };
 
 const deleteOption = async (id) => {
+    await sql`DELETE FROM question_answers WHERE question_answer_option_id = ${id}`;
     await sql`DELETE FROM question_answer_options WHERE id = ${id}`;
 };
 

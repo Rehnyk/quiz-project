@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
     <link rel="stylesheet" type="text/css" href="/static/topics.css">
     <link rel="stylesheet" type="text/css" href="/static/quiz.css">
+    <link rel="stylesheet" type="text/css" href="/static/login.css">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">

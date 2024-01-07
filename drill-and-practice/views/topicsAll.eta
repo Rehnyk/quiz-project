@@ -24,7 +24,7 @@
     <ul>
         <% it.topics.forEach(t => { %>
             <li class="topic-item" data-task-id="<%= t.id %>">
-                <a class="list-item-link" href="/topics/<%= t.id %>"> [ID: <%= t.id %>] - <%= t.name %> </a>
+                <a class="list-item-link" href="/topics/<%= t.id %>"> <%= t.name %> </a>
 
                 <% if (it.user && it.user.admin) { %>
                 <form method="POST" action="/topics/<%= t.id %>/delete">

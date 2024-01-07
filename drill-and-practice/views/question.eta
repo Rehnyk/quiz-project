@@ -34,7 +34,7 @@
             <li class="option-item">
                 <div class="list-item">
 
-                    [ID:<%= o.id %>] - <%= o.option_text %>
+                    <%= o.option_text %>
                     <% if (o.is_correct) { %>
                         <i class="fa-regular fa-circle-check"></i>
                     <% } %>

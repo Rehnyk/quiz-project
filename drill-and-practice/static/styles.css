@@ -124,56 +124,7 @@ h1.api-header {
     margin: 20px 0 50px 0;
 }
 
-/******** LOGIN FORM **********************************************/
-.user-page {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 500px;
-    margin: 60px auto;
-}
 
-.authentication-form {
-    display: flex;
-    justify-content: center;
-    max-width: 500px;
-    margin: auto;
-    flex-wrap: wrap;
-    font-weight: bold;
-}
-
-.authentication-form div {
-    width: 100%;
-}
-
-.authentication-form div input {
-    width: 100%;
-}
-
-.email input, .password input {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid grey;
-    border-radius: 8px;
-    text-decoration: none;
-    color: black;
-}
-
-.submit-btn input {
-    border: 1px solid grey;
-    padding: 6px 10px;
-    font-weight: bold;
-    color: white;
-    border-radius: 8px;
-    margin: 15px 0;
-    background: #0831be;
-}
-
-.auth-link {
-    color: black;
-}
 
 /******** NAVIGATION BAR ******************************************/
 .nav-bar {

@@ -15,7 +15,6 @@ const createOption = async ({request, response, params, render, user}) => {
         });
 
     if (!passes) {
-        console.log('ERRORS:', errors)
         render("question.eta",{ question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
             topic: await topicService.findTopicById(params.id),

@@ -52,4 +52,8 @@ const deleteQuestion = async ({request, response, params}) => {
     response.redirect(`/topics/${params.tId}`);
 };
 
-export {createQuestion, findQuestionById, deleteQuestion};
+export {
+    createQuestion,
+    findQuestionById,
+    deleteQuestion
+};

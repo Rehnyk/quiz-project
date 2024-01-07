@@ -13,7 +13,7 @@
                 <% it.options.forEach(o => { %>
                     <li class="option-item">
                         <div class="list-item">
-                            [ID:<%= o.id %>] - <%= o.option_text %>
+                            <%= o.option_text %>
                         </div>
 
                         <form method="POST"
@@ -35,7 +35,7 @@
                             <li class="option-item ">
 
                                 <div class="list-item <%= o.is_correct ? 'correct-answer' : '' %>">
-                                    [ID:<%= o.id %>] - <%= o.option_text %>
+                                    <%= o.option_text %>
 
                                     <% if (o.is_correct) { %>
                                         <i class="fa-solid fa-check"></i>
@@ -48,27 +48,41 @@
                     <p class="correct-text">Correct!</p>
 
                 <% } else if (it.answerView === "incorrect") { %>
-                    <ul>
-                        <% it.options.forEach(o => { %>
-                            <li class="option-item ">
 
-                                <div class="list-item <%= o.is_correct ? 'correct-answer' : '' %> <%= parseInt(o.id) === parseInt(it.userAnswerId) ? 'incorrect-answer' : '' %>">
-                                    [ID:<%= o.id %>] - <%= o.option_text %>
 
-                                    <% if (o.is_correct) { %>
-                                        <i class="fa-solid fa-check"></i>
-                                    <% } %>
+                        <ul>
+                            <% it.options.forEach(o => { %>
+                                <li class="option-item ">
 
-                                    <% if (parseInt(o.id) === parseInt(it.userAnswerId)) { %>
-                                        <i class="fa-solid fa-xmark"></i>
-                                    <% } %>
-                                </div>
-                            </li>
-                        <% }); %>
-                    </ul>
-                    <p class="incorrect-text">Incorrect!</p>
+                                    <div class="list-item <%= o.is_correct ? 'correct-answer' : '' %> <%= parseInt(o.id) === parseInt(it.userAnswerId) ? 'incorrect-answer' : '' %>">
+                                        <%= o.option_text %>
 
-                        <p>The correct answer was: <strong><%= it.correctAnswer.option_text %></strong></p>
+                                        <% if (o.is_correct) { %>
+                                            <i class="fa-solid fa-check"></i>
+                                        <% } %>
+
+                                        <% if (parseInt(o.id) === parseInt(it.userAnswerId)) { %>
+                                            <i class="fa-solid fa-xmark"></i>
+                                        <% } %>
+                                    </div>
+                                </li>
+                            <% }); %>
+                        </ul>
+
+                        <p class="incorrect-text">Incorrect!</p>
+
+                        <% if (it.correctAnswers.length === 0) { %>
+                            <p>There are no correct answers provided for this question.</p>
+                        <% } else if (it.correctAnswers.length === 1) { %>
+                            <p>The correct answer was: <strong><%= it.correctAnswers.option_text %></strong></p>
+                        <% } else { %>
+                            <p>The correct answers were: </p>
+                            <% it.correctAnswers.forEach(a => { %>
+                            <ul >
+                                <li class="wrong-ans"><strong><%= a.option_text %></strong></li>
+                            </ul>
+                            <% }); %>
+                        <% } %>
 
                 <% } %>
                 <a href="/quiz/<%= it.question.topic_id %>" class="next-question">Next question</a>
@@ -77,6 +91,7 @@
 
     <% } else { %>
         <p>There are no answers for this question.</p>
+        <a href="/quiz/<%= it.question.topic_id %>" class="next-question">Next question</a>
     <% } %>
 
 

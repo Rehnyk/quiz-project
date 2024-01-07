@@ -11,13 +11,7 @@ const findUserByEmail = async (email) => {
     return await sql`SELECT * FROM users WHERE email = ${email}`;
 };
 
-const deleteAllUsers = async () => {
-    await sql`DELETE FROM users`;
-}
-
-
 export {
     addUser,
     findUserByEmail,
-    deleteAllUsers
 };

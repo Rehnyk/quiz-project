@@ -11,7 +11,7 @@
         <% it.topics.forEach(t => { %>
             <li class="topic-item" data-task-id="<%= t.id %>">
                 <a class="list-item-link" href="/quiz/<%= t.id %>">
-                    [ID: <%= t.id %>] - <%= t.name %>
+                    <%= t.name %>
                     <p class="quest-count"><%= t.numberOfQuestions %></p>
                 </a>
             </li>

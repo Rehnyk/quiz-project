@@ -86,3 +86,9 @@
     color: #0c0c0c;
     background: #e5e3e3;
 }
+
+.wrong-ans {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}

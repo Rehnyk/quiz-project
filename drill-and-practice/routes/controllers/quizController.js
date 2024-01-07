@@ -38,7 +38,7 @@ const showQuestion = async ({request, response, render, params, user}) => {
         });
 };
 
-const sendAnswer = async ({request, response, render, user, params}) => {
+const sendAnswer = async ({request, response, user, params}) => {
     await optionService.addQuizAnswer(user.id, params.qId, params.oId);
     const option = await optionService.findOptionById(params.oId);
 
@@ -69,10 +69,17 @@ const wrongAnswer = async ({request, response, render, params, user}) => {
             question: await questionService.findQuestionById(params.qId),
             options: await optionService.showOptions(params.qId),
             answerView: "incorrect",
-            correctAnswer: correctAnswers[0],
+            correctAnswers: correctAnswers,
             userAnswerId: queryParams.get("user_answer_id"),
             user
         });
 };
 
-export {showTopics, findTopicById, showQuestion, sendAnswer, correctAnswer, wrongAnswer};
+export {
+    showTopics,
+    findTopicById,
+    showQuestion,
+    sendAnswer,
+    correctAnswer,
+    wrongAnswer
+};

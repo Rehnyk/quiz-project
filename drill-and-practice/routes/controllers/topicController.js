@@ -8,8 +8,6 @@ const createTopic = async ({request, response, render, user}) => {
     if (!user.admin) {
         response.status = 401
     } else {
-        console.log('ONLY ADMIN SHOULD SEE THIS')
-
 
         const body = request.body({type: "form"});
         const params = await body.value;
@@ -21,7 +19,6 @@ const createTopic = async ({request, response, render, user}) => {
         });
 
         if (!passes) {
-            console.log('ERRORS:', errors)
             render("topicsAll.eta", {topics: await topicService.showTopics(),
                 errors,
                 user});
@@ -54,8 +51,6 @@ const deleteTopic = async ({request, response, params, user}) => {
     if (!user.admin) {
         response.status = 401
     } else {
-        console.log('ONLY ADMIN SHOULD SEE THIS')
-
         const topicQuestions = await questionService.findQuestions(params.id);
 
         for (const q of topicQuestions) {
@@ -68,6 +63,5 @@ const deleteTopic = async ({request, response, params, user}) => {
         response.redirect("/topics");
     }
 };
-
 
 export {createTopic, showTopics, findTopicById, deleteTopic};
