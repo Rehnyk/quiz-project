@@ -74,7 +74,7 @@
                         <% if (it.correctAnswers.length === 0) { %>
                             <p>There are no correct answers provided for this question.</p>
                         <% } else if (it.correctAnswers.length === 1) { %>
-                            <p>The correct answer was: <strong><%= it.correctAnswers.option_text %></strong></p>
+                            <p>The correct answer was: <strong><%= it.correctAnswers[0].option_text %></strong></p>
                         <% } else { %>
                             <p>The correct answers were: </p>
                             <% it.correctAnswers.forEach(a => { %>
