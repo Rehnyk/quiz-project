@@ -24,10 +24,6 @@
         <% it.questions.forEach(q => { %>
         <li class="question-item">
             <a class="list-item-link" href="/topics/<%= q.topic_id %>/questions/<%= q.id %>"> <%= q.question_text %> </a>
-
-            <form method="POST" action="/topics/<%= q.topic_id %>/questions/<%= q.id %>/delete">
-                <input class="list-action" type="submit" value="Delete Question"/>
-            </form>
         </li>
         <% }); %>
 

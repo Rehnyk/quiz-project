@@ -27,6 +27,19 @@ h1 {
     margin-right: 5px;
 }
 
+.delete-question {
+    border: 1px solid grey;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    background: #eeeded;
+}
+
+.delete-question:hover {
+    color: white;
+    background: #363636;
+}
+
 /******** FORM FOR ADDING NEW ITEMS *******************************/
 h4{
     margin-top: 40px;
