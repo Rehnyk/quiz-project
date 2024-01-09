@@ -21,6 +21,8 @@
     <% } else { %>
 
         <div class="user-nav">
+
+            <%= it.user.email %>
             <a href="/auth/logout">Logout</a>
         </div>
 
